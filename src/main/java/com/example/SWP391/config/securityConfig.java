@@ -29,7 +29,7 @@ public class securityConfig {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(author -> {
                     author.requestMatchers("/api-auth/**").permitAll();// tu do ko can dang nhap
-//                    author.requestMatchers(HttpMethod.GET,"/product").permitAll();// tu do ko can dang nhap
+                    author.requestMatchers(HttpMethod.GET,"/product").permitAll();// tu do ko can dang nhap
                     author.requestMatchers("/api/**").permitAll();
                     author.requestMatchers("/api-sponsor/**").permitAll();
                     author.requestMatchers("/api-events/**").permitAll();
