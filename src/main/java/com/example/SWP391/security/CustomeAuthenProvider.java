@@ -1,4 +1,4 @@
-package com.example.SWP391.Security;
+package com.example.SWP391.security;
 
 import com.example.SWP391.entity.Account;
 import com.example.SWP391.repository.AccountRepository;

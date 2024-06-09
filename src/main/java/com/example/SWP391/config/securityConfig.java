@@ -1,6 +1,6 @@
 package com.example.SWP391.config;
 
-import com.example.SWP391.Security.CustomeAuthenProvider;
+import com.example.SWP391.security.CustomeAuthenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
