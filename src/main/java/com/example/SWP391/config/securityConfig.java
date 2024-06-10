@@ -47,14 +47,16 @@ public class securityConfig{
 //                .build();
 //    }
 @Bean
-public SecurityFilterChain filterChain(HttpSecurity http, CustomFilterSecurity customFilterSecurity) throws Exception {
+public SecurityFilterChain filterChain(HttpSecurity http, CustomFilterSecurity customFilterSecurity,UrlBasedCorsConfigurationSource corsConfigurationSource) throws Exception {
     http.csrf(csrf -> csrf.disable())
+            .cors(cros -> cros.configurationSource(corsConfigurationSource))
             .authorizeRequests(authorize -> authorize
                     .requestMatchers("/api-auth/**").permitAll() // Allow access to /api-auth/** without authentication
                     .requestMatchers(HttpMethod.GET, "/product").permitAll() // Allow GET requests to /product without authentication
                     .requestMatchers("/api/**").permitAll() // Allow access to /api/** without authentication
                     .requestMatchers("/api-sponsor/**").permitAll() // Allow access to /api-sponsor/** without authentication
                     .requestMatchers("/api-events/**").permitAll() // Allow access to /api-events/** without authentication
+
                     .anyRequest().authenticated() // Require authentication for any other request
             )
             .addFilterBefore(customFilterSecurity, UsernamePasswordAuthenticationFilter.class)
