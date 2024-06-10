@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import io.jsonwebtoken.io.Encoders;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -28,7 +25,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtHelper jwtHelper;
-    @PostMapping("/login")
+    @PostMapping ("/login")
     public ResponseEntity<?> sinIn(@RequestParam String email , @RequestParam String password) {
 
 //        SecretKey key = Jwts.SIG.HS256.key().build(); //or HS384.key() or HS512.key()

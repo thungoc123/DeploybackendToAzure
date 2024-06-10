@@ -56,6 +56,7 @@ public SecurityFilterChain filterChain(HttpSecurity http, CustomFilterSecurity c
                     .requestMatchers("/api/**").permitAll() // Allow access to /api/** without authentication
                     .requestMatchers("/api-sponsor/**").permitAll() // Allow access to /api-sponsor/** without authentication
                     .requestMatchers("/api-events/**").permitAll() // Allow access to /api-events/** without authentication
+                    .requestMatchers("/api-feedbacks/**").permitAll() // Allow access to /api-events/** without authentication
 
                     .anyRequest().authenticated() // Require authentication for any other request
             )
