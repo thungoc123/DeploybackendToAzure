@@ -1,5 +1,6 @@
 package com.example.SWP391.config;
 
+import com.example.SWP391.filter.CustomFilterSecurity;
 import com.example.SWP391.security.CustomeAuthenProvider;
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
@@ -30,20 +32,22 @@ public class securityConfig{
                 .build();
     }
 
-////    @Bean
-////    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-////        return http.csrf(AbstractHttpConfigurer::disable)
-////                .authorizeHttpRequests(author -> {
-////                    author.requestMatchers("/api-auth/**").permitAll();// tu do ko can dang nhap
-////                    author.requestMatchers(HttpMethod.GET,"/product").permitAll();// tu do ko can dang nhap
-////                    author.requestMatchers("/api/**").permitAll();
-////                    author.requestMatchers("/api-sponsor/**").permitAll();
-////                    author.requestMatchers("/api-events/**").permitAll();
-////                    author.anyRequest().authenticated(); // tat ca link con lai phai chung thuc
-////                }).build();
-////    }
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http, CustomFilterSecurity customFilterSecurity) throws Exception {
+//        return http.csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests(author -> {
+//                    author.requestMatchers("/api-auth/**").permitAll();// tu do ko can dang nhap
+//                    author.requestMatchers(HttpMethod.GET,"/product").permitAll();// tu do ko can dang nhap
+//                    author.requestMatchers("/api/**").permitAll();
+//                    author.requestMatchers("/api-sponsor/**").permitAll();
+//                    author.requestMatchers("/api-events/**").permitAll();
+//                    author.anyRequest().authenticated(); // tat ca link con lai phai chung thuc
+//                })
+//                .addFilterBefore(customFilterSecurity, UsernamePasswordAuthenticationFilter.class)
+//                .build();
+//    }
 @Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+public SecurityFilterChain filterChain(HttpSecurity http, CustomFilterSecurity customFilterSecurity) throws Exception {
     http.csrf(csrf -> csrf.disable())
             .authorizeRequests(authorize -> authorize
                     .requestMatchers("/api-auth/**").permitAll() // Allow access to /api-auth/** without authentication
@@ -53,6 +57,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                     .requestMatchers("/api-events/**").permitAll() // Allow access to /api-events/** without authentication
                     .anyRequest().authenticated() // Require authentication for any other request
             )
+            .addFilterBefore(customFilterSecurity, UsernamePasswordAuthenticationFilter.class)
             .cors(cors -> cors.configurationSource(corsConfigurationSource())); // Enable CORS with custom configuration
 
     return http.build();
