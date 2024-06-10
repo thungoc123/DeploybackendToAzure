@@ -29,46 +29,45 @@ public class securityConfig{
                 .authenticationProvider(customeauthenProvider)
                 .build();
     }
-
-////    @Bean
-////    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-////        return http.csrf(AbstractHttpConfigurer::disable)
-////                .authorizeHttpRequests(author -> {
-////                    author.requestMatchers("/api-auth/**").permitAll();// tu do ko can dang nhap
-////                    author.requestMatchers(HttpMethod.GET,"/product").permitAll();// tu do ko can dang nhap
-////                    author.requestMatchers("/api/**").permitAll();
-////                    author.requestMatchers("/api-sponsor/**").permitAll();
-////                    author.requestMatchers("/api-events/**").permitAll();
-////                    author.anyRequest().authenticated(); // tat ca link con lai phai chung thuc
-////                }).build();
-////    }
 @Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf(csrf -> csrf.disable())
-            .authorizeRequests(authorize -> authorize
-                    .requestMatchers("/api-auth/**").permitAll() // Allow access to /api-auth/** without authentication
-                    .requestMatchers(HttpMethod.GET, "/product").permitAll() // Allow GET requests to /product without authentication
-                    .requestMatchers("/api/**").permitAll() // Allow access to /api/** without authentication
-                    .requestMatchers("/api-sponsor/**").permitAll() // Allow access to /api-sponsor/** without authentication
-                    .requestMatchers("/api-events/**").permitAll() // Allow access to /api-events/** without authentication
-                    .anyRequest().authenticated() // Require authentication for any other request
-            )
-            .cors(cors -> cors.configurationSource(corsConfigurationSource())); // Enable CORS with custom configuration
-
-    return http.build();
-}
-
-    @Bean
-    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList("https://eventmanagementfu.azurewebsites.net/")); // Adjust allowed origins
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-        config.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(author -> {
+                    author.requestMatchers("/api-auth/**").permitAll();// tu do ko can dang nhap
+                    author.requestMatchers(HttpMethod.GET,"/product").permitAll();// tu do ko can dang nhap
+                    author.requestMatchers("/api/**").permitAll();
+                    author.requestMatchers("/api-sponsor/**").permitAll();
+                    author.requestMatchers("/api-events/**").permitAll();
+                    author.anyRequest().authenticated(); // tat ca link con lai phai chung thuc
+                }).build();
     }
-
 }
+//@Bean
+//public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//    http.csrf(csrf -> csrf.disable())
+//            .authorizeRequests(authorize -> authorize
+//                    .requestMatchers("/api-auth/**").permitAll() // Allow access to /api-auth/** without authentication
+//                    .requestMatchers(HttpMethod.GET, "/product").permitAll() // Allow GET requests to /product without authentication
+//                    .requestMatchers("/api/**").permitAll() // Allow access to /api/** without authentication
+//                    .requestMatchers("/api-sponsor/**").permitAll() // Allow access to /api-sponsor/** without authentication
+//                    .requestMatchers("/api-events/**").permitAll() // Allow access to /api-events/** without authentication
+//                    .anyRequest().authenticated() // Require authentication for any other request
+//            )
+//            .cors(cors -> cors.configurationSource(corsConfigurationSource())); // Enable CORS with custom configuration
+//
+//
+//    return http.build();
+//}
+//
+//    @Bean
+//    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOrigins(Arrays.asList("https://eventmanagementfu.azurewebsites.net/")); // Adjust allowed origins
+//        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+//        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+//        config.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return source;
+//    }

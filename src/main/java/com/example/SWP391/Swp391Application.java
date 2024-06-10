@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class Swp391Application {
 
-	@GetMapping("/test")
-	public String test() {
-		return "test";
-	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(Swp391Application.class, args);
