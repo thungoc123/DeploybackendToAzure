@@ -15,11 +15,5 @@ public class swaggerConfig {
                         .description("API documentation for your application"));
     }
 
-    @Bean
-    public GroupedOpenApi publicApi() {
-        return GroupedOpenApi.builder()
-                .group("public")
-                .pathsToMatch("/api/**")
-                .build();
-    }
+
 }
