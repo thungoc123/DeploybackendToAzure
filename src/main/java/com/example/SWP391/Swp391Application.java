@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+//@EnableSwagger2
 public class Swp391Application {
 
-
-
 	public static void main(String[] args) {
+
 		SpringApplication.run(Swp391Application.class, args);
 	}
 

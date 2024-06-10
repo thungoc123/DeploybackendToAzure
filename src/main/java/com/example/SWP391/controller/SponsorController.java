@@ -1,4 +1,7 @@
 package com.example.SWP391.controller;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.SWP391.Payload.Request.SponsorSignUp;
 import com.example.SWP391.model.dto.SponsorDto;
@@ -28,7 +31,9 @@ public class SponsorController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
+    @Operation(summary = "Lấy danh sách tất cả người dùng", description = "API này trả về danh sách tất cả người dùng trong hệ thống.")
+    @ApiResponse(responseCode = "201", description = "Người dùng được tạo thành công")
+    @ApiResponse(responseCode = "400", description = "Dữ liệu không hợp lệ")
     @GetMapping
     public ResponseEntity<List<SponsorDto>> getAllSponsors() {
         List<SponsorDto> sponsors = sponsorService.getAllSponsors();

@@ -39,8 +39,10 @@ public class securityConfig{
                     author.requestMatchers("/api-auth/**").permitAll();// tu do ko can dang nhap
                     author.requestMatchers(HttpMethod.GET,"/product").permitAll();// tu do ko can dang nhap
                     author.requestMatchers("/api/**").permitAll();
+                    author.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll();
                     author.requestMatchers("/api-sponsor/**").permitAll();
                     author.requestMatchers("/api-events/**").permitAll();
+                    author.requestMatchers("/").permitAll();
                     author.anyRequest().authenticated(); // tat ca link con lai phai chung thuc
                 }).build();
 
